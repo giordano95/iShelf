@@ -3,9 +3,11 @@ IOT Inventory Management
 
 
 Why TheThingsNetwork?
+
 One of the first and stable projects for IOT networks based on LoRaWAN is represented by TheThingsNetwork. As LoRaWAN is not an IP protocol we need this network to send messages that come out from the device to the desired application. That’s why TheThingsNetwork is between the gateways and the applications.
 
 How does TTN work?
+
 Routing operations are all executed in a distributed and decentralized way. This allows to perform either local or global implementations. Messages are sent through the LoRa protocol and they can be of three different types:
 -	A (rarely sending data)
 -	B (regularly receiving data)
