@@ -7,7 +7,7 @@ April 2019
 
 ## Why TheThingsNetwork?
 
-One of the first and stable projects for IOT networks based on LoRaWAN is represented by TheThingsNetwork. As LoRaWAN is not an IP protocol we need this network to send messages that come out from the device to the desired application. That’s why TheThingsNetwork is between the gateways and the applications.
+One of the first and most stable projects for IOT networks based on LoRaWAN is represented by TheThingsNetwork. As LoRaWAN is not an IP protocol we need this network to send messages that come out from the device to the desired application. That’s why TheThingsNetwork is between the gateways and the applications.
 
 ## How does TTN work?
 
