@@ -1,3 +1,3 @@
-Francesco Cassini
-Davide Giordano
-Matteo Ginesi
+Francesco Cassini\n
+Davide Giordano\n
+Matteo Ginesi\n
