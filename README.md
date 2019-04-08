@@ -1,6 +1,8 @@
 # iShelf
 IOT Inventory Management
+
 Internet Of Things Mini Project - Sapienza University of Rome
+
 April 2019
 
 ## Why TheThingsNetwork?
