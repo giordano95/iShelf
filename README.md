@@ -10,6 +10,7 @@ Routing operations are all executed in a distributed and decentralized way. This
 -	A (rarely sending data)
 -	B (regularly receiving data)
 -	C (constantly receiving data)
+
 The gateway is a device that receives LoRa messages and sends them to the router. Router is a microservice that is responsible of the gateway state and of the transmission scheduling. Each router is connected to one or more brokers that represent the heart of TTN. The broker is a microservice that identifies the device, performs some processing on data and sends the packet to the relative application’s handler. It is very important because it associates a specific device with a specific application and sends uplink messages to the correct receiver.  The handler is a microservice that is responsible of the data management within the applications and it also performs AES decrypt/encrypt operations.
 The number of gateways is also important because more gateways mean more scalability.
 In order to connect a device to TheThingsNetwork we need to add it to the console. The registration is very simple and the majority of the settings are randomly generated. One of the most important things to remember is that TTN allows us to use two different activation methods for our devices. One is OTAA and the other one is ABP. The main difference between the two is that OTAA uses dynamic keys while ABP keys are inserted manually by the user in the code of the board. This technique is obviously more practical but there are some security issues to face.
