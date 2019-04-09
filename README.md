@@ -5,6 +5,39 @@ Internet Of Things Mini Project - Sapienza University of Rome
 
 April 2019
 
+# Technical brief
+## Abstract
+The goal of this project is to build a serviceable, reliable and cheap system in full with the IoT philosophy. We have devised an intelligent product management system, both in the industrial and commercial fields, capable of merging the simplicity of the now ancient “shelf” concept with the modern technologies available.
+Our audience is made of customers who belong both to the world of industry and logistics, department stores, shopping centres, small retailers and travelling exhibitors.
+We have divided the design into two different scenarios: “large scale deploy” and “low power exhibitors”, to cover in a more efficient and widespread way any type of request from our customers. 
+In this document we present the technical characteristics of the product.
+
+## Hardware
+The technical choice fell on the material available to the course professor, coherently with the associated development systems.
+These are part of the ST Microelectronics product ecosystem and the “mBed” online development system.
+Part of the development, especially the study of the platform, was carried out using free and open source compilers and debuggers.
+
+### Microcontroller
+The board at our disposal (B-L072Z-LRWAN1) is equipped with an ARM microcontroller (MCU) of the series STM32L0 with those characteristics:
+* Ultra-low-power platform:
+    * 1.65 V to 3.6 V power supply
+    * 0.29 μA Standby mode
+    * Down to 93 μA/M Hz in Run mode
+    * 41 μA 12-bit ADC conversion at 10 ksps
+* Core:
+    * ARM R 32-bit Cortex R -M0+ with MPU
+    * From 32 kHz up to 32 MHz
+* Memories:
+    * Up to 192 KB Flash memory with ECC(2 banks with read-while-write capability 20 KB RAM, 6 KB of data EEPROM with ECC)
+
+### Sensors
+The presence sensors are simply on/off switch and they can be easily switched to more complex and efficient pressure/weight sensors. Only for first stage of development (and debug) we emulate this kind of data by random number generation.
+
+### LoRaWAN
+We use LoRaWAN for its low power profile, long range and high time life for the end device.
+It has AES encryption for secure communication built-it and it is easy to deploy on any kind of sensor circuit with a simple microcontroller.
+It can be easily connected to the The Things Network in order to send data over internet to cloud service.
+
 ## Why TheThingsNetwork?
 
 One of the first and most stable projects for IOT networks based on LoRaWAN is represented by TheThingsNetwork. As LoRaWAN is not an IP protocol we need this network to send messages that come out from the device to the desired application. That’s why TheThingsNetwork is between the gateways and the applications.
