@@ -29,8 +29,9 @@ In this way all the packets that we receive on TTN are automatically sent to our
 
 
 
-Elastic and Kibana 
+## H2 Elastic and Kibana 
 
+### H3 Info about Elastic
 
 Some technical (but useful) information to know about Elasticsearch are:
 It is a real time distributed and analytics engine.
@@ -49,7 +50,7 @@ You need to download the same version for Elasticsearch and Kibana.
 When, in the future, will find yourself needing to develop a software to interact with Elasticsearch, you can use a programming language to interact with it. Some of the programming languages acceptable are:
 Java, C#, Python, JavaScript, PHP, Perl, Ruby
 
-Create an Elastic Demo Dataset with Python
+## H2 Create an Elastic Demo Dataset with Python
 To test better Elastic my work has been foculised on create a demo dataset to use to study both Elastic and Kibana.
 As we said previous, it's possible load data with Rest method (url method) for example using a simple interface as PostMan.
 Rest is the method that we use to connect our device iShell trought TTN until Elastic.
