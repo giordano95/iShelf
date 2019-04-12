@@ -38,11 +38,13 @@ We use LoRaWAN for its low power profile, long range and high time life for the 
 It has AES encryption for secure communication built-it and it is easy to deploy on any kind of sensor circuit with a simple microcontroller.
 It can be easily connected to the The Things Network in order to send data over internet to cloud service.
 
-## Why TheThingsNetwork?
+## TheThingsNetwork
+
+### Why TheThingsNetwork?
 
 One of the first and most stable projects for IOT networks based on LoRaWAN is represented by TheThingsNetwork. As LoRaWAN is not an IP protocol we need this network to send messages that come out from the device to the desired application. That’s why TheThingsNetwork is between the gateways and the applications.
 
-## How does TTN work?
+### How does TTN work?
 
 Routing operations are all executed in a distributed and decentralized way. This allows to perform either local or global implementations. Messages are sent through the LoRa protocol and they can be of three different types:
 -	A (rarely sending data)
@@ -52,11 +54,15 @@ Routing operations are all executed in a distributed and decentralized way. This
 The gateway is a device that receives LoRa messages and sends them to the router. Router is a microservice that is responsible of the gateway state and of the transmission scheduling. Each router is connected to one or more brokers that represent the heart of TTN. The broker is a microservice that identifies the device, performs some processing on data and sends the packet to the relative application’s handler. It is very important because it associates a specific device with a specific application and sends uplink messages to the correct receiver.  The handler is a microservice that is responsible of the data management within the applications and it also performs AES decrypt/encrypt operations.
 The number of gateways is also important because more gateways mean more scalability.
 
-In order to connect a device to TheThingsNetwork we need to add it to the console. The registration is very simple and the majority of the settings are randomly generated. One of the most important things to remember is that TTN allows us to use two different activation methods for our devices. One is OTAA and the other one is ABP. The main difference between the two is that OTAA uses dynamic keys while ABP keys are inserted manually by the user in the code of the board. This technique is obviously more practical but there are some security issues to face.
+In order to connect a device to TheThingsNetwork we need to add it to the console on https://www.thethingsnetwork.org. The registration is very simple and the majority of the settings are randomly generated. We have to set just our device's ID that must be unique within the application. One of the most important things to remember is that TTN allows us to use two different activation methods for our devices. One is OTAA and the other one is ABP. The main difference between the two is that OTAA uses dynamic keys while ABP keys are inserted manually by the user in the code of the board. This technique is obviously more practical but there are some security issues to face. In this project we use ABP method.
 
-Once the board is connected to TTN, communication starts and sent packets are visualized on TTN through the Data panel. This panel gives us some information about the sender and the message. The payload of the message is Hex encrypted, but an ASCII translation is also proposed. The message is decoded following the instructions of the payload format, that is nothing more than a JSON file.     
+Once the board is connected to TTN, communication starts and sent packets are visualized on TTN through the Data panel. This panel gives us some information about the sender and the message. The payload of the message is Hex encrypted, but an ASCII translation is also proposed. The message is decoded following the instructions of the payload format, that is nothing more than a JSON file. It is possible to modify the payload format in the relative panel.
 
-As we have previously said, TTN is just used to route the packets in the network and so we are also interested in knowing how to come out from it. To do so, there is a TTN integration that is called HTTP integration. It simply forward packets to the desired server through the usage of HTTP protocol. As our server needs a login to be used, it was necessary to add to the server URL, also the connection parameters such as username and password. This is done by clearly writing them at the beginning of the URL and by separating them with an "@" symbol. Obviously this choice can cause security issues but for our demo is not relevant at the moment.
+As we have previously said, TTN is just used to route the packets in the network and so we are also interested in knowing how to come out from it. To do so, there is a TTN integration that is called HTTP integration. It simply forwards packets to the desired server through the usage of HTTP protocol. As our server needs a login to be used, it was necessary to add to the server URL, also the connection parameters such as username and password. This is done by clearly writing them at the beginning of the URL and by separating them with an "@" symbol from the rest of the URL, like this:
+   ```
+   http://user:password@cloud_server_url.com:port
+   ```
+Obviously this choice can cause security issues but for our demo is not relevant at the moment.
 
 In this way all the packets that we receive on TTN are automatically sent to our server. In this specific case, our server is ElasticSearch that is a distributed database that works with Kibana visualizer to show us some graphs about our application.
 
