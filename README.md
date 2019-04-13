@@ -78,7 +78,7 @@ For example, if you have a cloud with 1000 nodes, you can analyse the entire inf
 Another important feature of Elastic is its Kibana, a great web interface to visualize and manipulate the data. It can be downloaded in elastic.co and installed following few simple steps. You need to download the same version for Elasticsearch and Kibana.
 When, in the future, will find yourself needing to develop a software to interact with Elasticsearch, you can use a programming language to interact with it. Some of the programming languages acceptable are: Java, C#, Python, JavaScript, PHP, Perl, Ruby
 
-Create an Elastic DEMO DATASET for iShelf (with Python)
+## Create an Elastic DEMO DATASET for iShelf (with Python)
 To test better Elastic we have been focused on create a demo dataset to use with Elastic and Kibana.
 As we said previous, it's possible load data with Rest method (url method) for example using a simple interface as PostMan. Rest is the method that we use to connect our device iShell trought TTN until Elastic. Anyway there other methods: for example the Dev Tools under Kibana or API tools Under Elastic interface.
 But it's also possible connect Python with Elastic to save documents.
