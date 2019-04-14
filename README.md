@@ -1,42 +1,101 @@
 # iShelf
-IOT Inventory Management
 
-Internet Of Things Mini Project - Sapienza University of Rome
+| IOT Inventory Management |
+| :--- |
+| Internet Of Things Mini Project - Sapienza University of Rome |
+| April 2019 |
 
-April 2019
-
-# Technical brief
-## Abstract
+## Technical brief
+### Abstract
 The goal of this project is to build a serviceable, reliable and cheap system in full with the IoT philosophy. We have devised an intelligent product management system, both in the industrial and commercial fields, capable of merging the simplicity of the now ancient “shelf” concept with the modern technologies available.
 Our audience is made of customers who belong both to the world of industry and logistics, department stores, shopping centres, small retailers and travelling exhibitors.
 We have divided the design into two different scenarios: “large scale deploy” and “low power exhibitors”, to cover in a more efficient and widespread way any type of request from our customers. 
 In this document we present the technical characteristics of the product.
 
-## Hardware
+### Hardware
 The technical choice fell on the material available to the course professor, coherently with the associated development systems.
-These are part of the ST Microelectronics product ecosystem and the “mBed” online development system.
+These are part of the ST Microelectronics product ecosystem and the “Mbed” online development system.
 Part of the development, especially the study of the platform, was carried out using free and open source compilers and debuggers.
 
-### Microcontroller
+#### Microcontroller
 The board at our disposal (B-L072Z-LRWAN1) is equipped with an ARM microcontroller (MCU) of the series STM32L0 with those characteristics:
-* Ultra-low-power platform:
+* **Ultra-low-power platform:**
     * 1.65 V to 3.6 V power supply
     * 0.29 μA Standby mode
     * Down to 93 μA/M Hz in Run mode
     * 41 μA 12-bit ADC conversion at 10 ksps
-* Core:
+* **Core:**
     * ARM R 32-bit Cortex R -M0+ with MPU
     * From 32 kHz up to 32 MHz
-* Memories:
+* **Memories:**
     * Up to 192 KB Flash memory with ECC(2 banks with read-while-write capability 20 KB RAM, 6 KB of data EEPROM with ECC)
 
-### Sensors
+#### Sensors
 The presence sensors are simply on/off switch and they can be easily switched to more complex and efficient pressure/weight sensors. Only for first stage of development (and debug) we emulate this kind of data by random number generation.
 
 ### LoRaWAN
 We use LoRaWAN for its low power profile, long range and high time life for the end device.
 It has AES encryption for secure communication built-it and it is easy to deploy on any kind of sensor circuit with a simple microcontroller.
 It can be easily connected to the The Things Network in order to send data over internet to cloud service.
+
+### Firmware
+#### Setting up Mbed online compiler
+Open _Mbed_ website at http://www.mbed.com and login (or register) in order to access the online compiler.
+Click on the **Import** button, make sure that you have selected *Programs* tab and click on *Click here* to import from URL.
+
+#### Sensors: reading \& sending data
+The device configuration starts with the creation of the data acquisition code. At Debug time we used the generation of a random number (between 0 and 255), but the code can be changed to enter the code to capture data from various sensors.
+The code to be edited is located in the file `main.cpp` in the function `static void send_message()` at line 10 _(`uint8_t data = rand()%0xFF;`)_.
+
+`main.cpp`
+~~~cpp .line-numbers
+...
+/**
+ * Sends a message to the Network Server
+ */
+static void send_message()
+{
+    uint16_t packet_len;
+    int16_t retcode;
+    
+    // Prototype random data for debugging
+    uint8_t data = rand()%0xFF;
+    
+    // TX status led
+    ledBlue = 1;
+    
+    packet_len = sprintf((char *) tx_buffer, "%d", data);
+    printf("\r\n Data sent: %d", data);   
+    
+    retcode = lorawan.send(MBED_CONF_LORA_APP_PORT, tx_buffer, packet_len,
+                           MSG_UNCONFIRMED_FLAG);
+...
+~~~
+
+### Change TTN login
+From the `TheThingsNetwork` site (https://www.thethingsnetwork.org/), create a new **Application**, create a new **Device** and get the information to copy on the file:
+
+`mbed_app.json`
+
+```json
+...
+ "target_overrides": {
+        "*": {
+            "platform.stdio-convert-newlines": true,
+            "platform.stdio-baud-rate": 115200,
+            "platform.default-serial-baud-rate": 115200,
+            "lora.over-the-air-activation": false,
+            "lora.duty-cycle-on": false,
+            "lora.phy": "EU868",
+            "lora.appskey": "<TTN APP SESSION KEY>",
+            "lora.nwkskey": "<TTN NET SESSION KEY>",
+            "lora.device-address": "0x<TTN DEVICE ADDRESS>" 
+        },
+...
+```
+ - Device Address
+ - Network Session Key
+ - App Session Key
 
 ## TheThingsNetwork
 
@@ -65,8 +124,6 @@ As we have previously said, TTN is just used to route the packets in the network
 Obviously this choice can cause security issues but for our demo is not relevant at the moment.
 
 In this way all the packets that we receive on TTN are automatically sent to our server. In this specific case, our server is ElasticSearch that is a distributed database that works with Kibana visualizer to show us some graphs about our application.
-
-
 
 ##  Elastic and Kibana 
 
